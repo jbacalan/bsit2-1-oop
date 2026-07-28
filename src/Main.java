@@ -1,115 +1,81 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Library {
+public class Main {
 
-    // Collection of books
-    private ArrayList<Book> books;
+    public static void main(String[] args) {
 
-    // Constructor
-    public Library() {
-        books = new ArrayList<>();
-    }
+        Scanner scanner = new Scanner(System.in);
 
-    // Add a book to the library
-    public void addBook(Book book) {
-        books.add(book);
-        System.out.println("Book added successfully!");
-    }
+        // Create one Library object
+        Library library = new Library();
 
-    // List all books
-    public void listBooks() {
+        int choice;
 
-        if (books.isEmpty()) {
-            System.out.println("The library is empty.");
-            return;
-        }
+        do {
+            System.out.println("\n===== LIBRARY INFORMATION SYSTEM =====");
+            System.out.println("1 - Add a book");
+            System.out.println("2 - List all books");
+            System.out.println("3 - Borrow a book");
+            System.out.println("4 - Return a book");
+            System.out.println("5 - Search a book");
+            System.out.println("0 - Exit");
+            System.out.print("Choose an option: ");
 
-        System.out.println("\n===== ALL BOOKS =====");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Clear the newline
 
-        for (int i = 0; i < books.size(); i++) {
-            Book book = books.get(i);
+            switch (choice) {
 
-            String status;
+                case 1:
+                    System.out.print("Enter book title: ");
+                    String title = scanner.nextLine();
 
-            if (book.isBorrowed()) {
-                status = "Borrowed";
-            } else {
-                status = "Available";
+                    System.out.print("Enter book author: ");
+                    String author = scanner.nextLine();
+
+                    // Create a Book object
+                    Book newBook = new Book(title, author);
+
+                    // Add the Book object to the Library
+                    library.addBook(newBook);
+                    break;
+
+                case 2:
+                    library.listBooks();
+                    break;
+
+                case 3:
+                    System.out.print("Enter the title of the book to borrow: ");
+                    String borrowTitle = scanner.nextLine();
+
+                    library.borrowBook(borrowTitle);
+                    break;
+
+                case 4:
+                    System.out.print("Enter the title of the book to return: ");
+                    String returnTitle = scanner.nextLine();
+
+                    library.returnBook(returnTitle);
+                    break;
+
+                case 5:
+                    System.out.print("Enter the title of the book to search: ");
+                    String searchTitle = scanner.nextLine();
+
+                    library.searchBook(searchTitle);
+                    break;
+
+                case 0:
+                    System.out.println("Goodbye! Thank you for using the Library Information System.");
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
 
-            System.out.println(
-                    (i + 1) + ". "
-                    + book.getTitle()
-                    + " by "
-                    + book.getAuthor()
-                    + " - "
-                    + status
-            );
-        }
-    }
+        } while (choice != 0);
 
-    // Borrow a book by title
-    public void borrowBook(String title) {
-
-        for (Book book : books) {
-
-            if (book.getTitle().equalsIgnoreCase(title)) {
-
-                if (book.isBorrowed()) {
-                    System.out.println("The book is already borrowed.");
-                } else {
-                    book.borrow();
-                    System.out.println(
-                            "You have successfully borrowed: "
-                            + book.getTitle()
-                    );
-                }
-
-                return;
-            }
-        }
-
-        System.out.println("Book not found.");
-    }
-
-    // Return a book by title
-    public void returnBook(String title) {
-
-        for (Book book : books) {
-
-            if (book.getTitle().equalsIgnoreCase(title)) {
-
-                if (!book.isBorrowed()) {
-                    System.out.println("The book is already available.");
-                } else {
-                    book.returnBook();
-                    System.out.println(
-                            "You have successfully returned: "
-                            + book.getTitle()
-                    );
-                }
-
-                return;
-            }
-        }
-
-        System.out.println("Book not found.");
-    }
-
-    // Search for a book by title
-    public void searchBook(String title) {
-
-        for (Book book : books) {
-
-            if (book.getTitle().equalsIgnoreCase(title)) {
-
-                System.out.println("Book found!");
-                System.out.println(book.describe());
-                return;
-            }
-        }
-
-        System.out.println("Book not found.");
+        scanner.close();
     }
 }
 ```
