@@ -6,7 +6,6 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Create one Library object
         Library library = new Library();
 
         int choice;
