@@ -32,10 +32,8 @@ public class Main {
                     System.out.print("Enter book author: ");
                     String author = scanner.nextLine();
 
-                    // Create a Book object
                     Book newBook = new Book(title, author);
 
-                    // Add the Book object to the Library
                     library.addBook(newBook);
                     break;
 
