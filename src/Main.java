@@ -1,10 +1,8 @@
-// Name: Jonathan Bacalan
-// Activity: Lab Activity 4 - Java Toolbox
-
 import java.util.Scanner;
 
 public class ToolBox {
-
+// Name: Jonathan Bacalan
+// Activity: Lab Activity 4 - Java Toolbox
     static String greet(String name) {
         return "Hello, " + name + "! Welcome to my Java Toolbox.";
     }
