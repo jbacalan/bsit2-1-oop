@@ -8,13 +8,13 @@ public class UserManager {
 
     private ArrayList<User> users = new ArrayList<>();
 
-    // Already written for you - study how it works.
+    // Already written for you
     public void add(User user) {
         users.add(user);
         System.out.println("Added: " + user.getName() + " (" + user.role() + ")");
     }
 
-    // Already written for you.
+    // Already written for you
     public void listAll() {
         if (users.isEmpty()) {
             System.out.println("No users yet.");
@@ -77,4 +77,4 @@ public class UserManager {
         return users.size();
     }
 }
-
+```
