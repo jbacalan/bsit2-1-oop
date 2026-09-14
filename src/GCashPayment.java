@@ -1,43 +1,47 @@
-// MayaPayment.java
-// Another CHILD of Payment that can also be refunded.
+// GCashPayment.java
+// A CHILD of Payment. A GCashPayment IS-A Payment, and it CAN-DO a refund.
 
-public class MayaPayment extends Payment implements Refundable {
+public class GCashPayment extends Payment implements Refundable {
 
-    // TODO 8(a)
-    private String email;
+    // TODO 7(a)
+    private String mobile;
 
-    // TODO 8(b)
-    public MayaPayment(int id, String payerName, double amount, String email) {
+    // TODO 7(b)
+    public GCashPayment(int id, String payerName, double amount, String mobile) {
         super(id, payerName, amount);
-        this.email = email;
+        this.mobile = mobile;
     }
 
-    // TODO 8(c)
-    public String getEmail() {
-        return email;
+    // TODO 7(c)
+    public String getMobile() {
+        return mobile;
     }
 
-    // TODO 8(d)
+    // TODO 7(d)
     @Override
     public String provider() {
-        return "MAYA";
+        return "GCASH";
     }
 
-    // TODO 8(e)
+    // TODO 7(e)
     @Override
     public void pay() {
-        System.out.printf(" Maya: PHP %.2f charged to the wallet of %s.%n",
-                getAmount(), email);
+        System.out.printf(" GCash: PHP %.2f sent from %s.%n",
+                getAmount(), mobile);
     }
 
-    // TODO 8(f)
+    // TODO 7(f)
     @Override
     public String refund() {
-        return "Maya refund of PHP "
+        return "GCash refund of PHP "
                 + String.format("%.2f", getAmount())
-                + " emailed to " + email + ".";
+                + " returned to " + mobile + ".";
     }
 
-    // No printThankYou() override.
-    // Maya inherits the parent's version.
+    // TODO 7(g)
+    @Override
+    public void printThankYou() {
+        super.printThankYou();
+        System.out.println(" An SMS receipt was sent to " + mobile);
+    }
 }
