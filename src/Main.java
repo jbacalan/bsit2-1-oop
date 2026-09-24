@@ -1,35 +1,51 @@
-private class Student {
-    private String studentId;
-    private String fullName;
-    private String program;
-    private int yearLevel;
+public class Main {
 
-    public Student(String studentId, String fullName,
-                   String program, int yearLevel) {
-        this.studentId = studentId;
-        this.fullName = fullName;
-        this.program = program;
-        this.yearLevel = yearLevel;
-    }
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        RideManager manager = new RideManager();
 
-    public String getStudentId() {
-        return studentId;
-    }
+        // Three sample bookings so the lists are never empty
+        manager.addRide(new Jeepney("Ana Reyes", 6.5));
+        manager.addRide(new Tricycle("Jerome Tan", 3.0));
+        manager.addRide(new Taxi("Liza Cruz", 5.0));
 
-    public String getFullName() {
-        return fullName;
-    }
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println();
+            System.out.println("========= LICEO RIDE =========");
+            System.out.println("1. Book a ride");
+            System.out.println("2. Show all tickets");
+            System.out.println("3. Find a passenger");
+            System.out.println("4. Show student discounts");
+            System.out.println("5. Show total sales");
+            System.out.println("0. Exit");
+            System.out.print("Choose: ");
+            choice = readInt(in);
 
-    public String getProgram() {
-        return program;
-    }
+            if (choice == 1) {
+                System.out.println("Vehicle: 1 = Jeepney, 2 = Tricycle, 3 = Taxi");
+                System.out.print("Choose vehicle: ");
+                int type = readInt(in);
+                System.out.print("Passenger name: ");
+                String name = in.nextLine().trim();
+                System.out.print("Distance in km: ");
+                double km = readDouble(in);
 
-    public int getYearLevel() {
-        return yearLevel;
-    }
-
-    public String describe() {
-        return studentId + " | " + fullName + " | " + program + " | Year " + yearLevel;
-    }
-}
-
+                Ride ride;                          // declared as the PARENT type
+                if (type == 1) {
+                    ride = new Jeepney(name, km);   // upcasting
+                } else if (type == 2) {
+                    ride = new Tricycle(name, km);
+                } else if (type == 3) {
+                    ride = new Taxi(name, km);
+                } else {
+                    System.out.println("Invalid vehicle.");
+                    continue;
+                }
+                manager.addRide(ride);
+                ride.printTicket("Booked! Ingat sa biyahe.");   // overloaded
+            } else if (choice == 2) {
+                System.out.println("ALL TICKETS (" + manager.count() + ")");
+                manager.showAllTicket
+            } else if (choice == 3) {
+                s();
