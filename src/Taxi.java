@@ -1,16 +1,24 @@
 package semifinal;
 
 /**
- * StudentDiscount - an INTERFACE (a list of promises).
- * Only rides that give students a discount implement this.
+ * Taxi - a child of Ride with NO student discount.
+ *
+ * Fare: PHP 45.00 flag-down, plus PHP 13.50 per km.
  */
-public interface StudentDiscount {
+public class Taxi extends Ride {
 
-    double discountedFare();
+    // GIVEN: constructor
+    public Taxi(String passenger, double km) {
+        super(passenger, km);
+    }
 
-    // GIVEN: a default method. Every class that implements this
-    // interface gets it for free. Notice it calls discountedFare().
-    default void printDiscount() {
-        System.out.printf("  Student fare   : PHP %.2f%n", discountedFare());
+    @Override
+    public double fare() {
+        return 45.00 + getKm() * 13.50;
+    }
+
+    @Override
+    public String vehicle() {
+        return "Taxi";
     }
 }
